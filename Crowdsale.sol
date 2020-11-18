@@ -11,13 +11,30 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5
 contract PupperCoinSale is Crowdsale, MintedCrowdsale, CappedCrowdsale, TimedCrowdsale, RefundablePostDeliveryCrowdsale {
 
     constructor(
-        // @TODO: Fill in the constructor parameters!
+        // Fill in the constructor parameters!
+        string memory name,
+        string memory symbol,
+        address payable wallet,
+        PupperCoin token,
+        uint goal,
+        uint rate,
+        uint openingTime,
+        uint closingTime
     )
-        // @TODO: Pass the constructor parameters to the crowdsale contracts.
+    
+        MintedCrowdsale()
+        CappedCrowdsale(cap)
+        TimedCrowdsale(openingTime, closingTime)
+        RefundableCrowdsale(goal)
+        RefundablePostDeliveryCrowdsale()
+        
+        // Pass the constructor parameters to the crowdsale contracts.
+        Crowdsale(rate, wallet, token)
         public
     {
         // constructor can stay empty
     }
+    
 }
 
 contract PupperCoinSaleDeployer {
@@ -31,6 +48,7 @@ contract PupperCoinSaleDeployer {
         public
     {
         // @TODO: create the PupperCoin and keep its address handy
+       
 
         // @TODO: create the PupperCoinSale and tell it about the token, set the goal, and set the open and close times to now and now + 24 weeks.
 
